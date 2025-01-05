@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zmiana danych</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        form {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        #photo-preview {
+            width: 150px;
+            height: 150px;
+            background-color: #ccc;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            display: block;
+            object-fit: cover;
+        }
+
+        .file-input {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Zmiana danych</h2>
+
+<form id="changeDataForm">
+    <label for="name">Imię:</label>
+    <input type="text" id="name" required>
+
+    <label for="surname">Nazwisko:</label>
+    <input type="text" id="surname" required>
+
+    <label for="dob">Data urodzenia:</label>
+    <input type="date" id="dob" required>
+
+    <label for="pesel">PESEL:</label>
+    <input type="text" id="pesel" required>
+
+    <label for="adres">ADRES:</label>
+    <input type='text' id="adres" required>
+
+    <label for="postcode">KOD POCZTOWY:</label>
+    <input id="postcode" placeholder="00-000" required>
+
+    <label for="city">MIASTO:</label>
+    <input type="text" id="city" required>
+
+    <label for="data_zameldowania">DATA ZAMELDOWANIA:</label>
+    <input type="date" id="data_zameldowania" required>
+
+    <label for="last_update">OSTATNIA AKTUALIZACJA:</label>
+    <input type="date" id="last_update" required>
+
+    <Label for="series">SERIA I NUMER DOWODU:</Label>
+    <input id="series" required>
+
+    <label for="expire_date">DATA WAZNOSCI:</label>
+    <input type="date" id="expire_date" required>
+
+    <label for="data_wydania">DATA WYDANIA:</label>
+    <input type="date" id="data_wydania" required>
+
+    <label for="organ_wydajacy">ORGAN WYDAJACY:</label>
+    <input id="organ_wydajacy" placeholder="PREZYDENT MIASTA ......" required>
+
+    <label for="plec">Plec:</label>
+    <input type="text" id="plec" placeholder="Kobieta/Mężczyzna" required>
+
+    <label for="birth_location">MIEJSCE URODZENIA:</label>
+    <input type="text" id="birth_location" required>
+
+    <label for="dad_surname">NAZWISKO RODOWE OJCA:</label>
+    <input type="text" id="dad_surname" required>
+
+    <label for="mom_surname">NAZWISKO RODOWE MATKI:</label>
+    <input type="text" id="mom_surname" required>
+
+    <label for="mom_name">IMIE MATKI:</label>
+    <input type="text" id="mom_name" required>
+
+    <label for="dad_name">IMIE OJCA:</label>
+    <input type="text" id="dad_name" required>
+
+    <!-- Nowe pole do wyboru pliku -->
+    <label for="photoFile">Zdjęcie (Wybierz plik):</label>
+    <input type="file" id="photoFile" class="file-input" accept="image/*">
+
+    <!-- Podgląd zdjęcia -->
+    <img id="photo-preview" alt="Podgląd zdjęcia">
+
+   <button type="button" onclick="redirectToPage()">Generuj</button>
+</form>
+
+<script>
+
+function redirectToPage() {
+        // Przekierowanie na stronę id.html
+        window.location.href = "id.html";
+    }
+
+        // Zapisanie danych w localStorage
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const data = {
+                name: document.getElementById('name').value,
+                surname: document.getElementById('surname').value,
+                dob: document.getElementById('dob').value,
+                pesel: document.getElementById('pesel').value,
+                adres: document.getElementById('adres').value,
+                postcode: document.getElementById('postcode').value,
+                city: document.getElementById('city').value,
+                data_zameldowania: document.getElementById('data_zameldowania').value,
+                last_update: document.getElementById('last_update').value,
+                series: document.getElementById('series').value,
+                expire_date: document.getElementById('expire_date').value,
+                data_wydania: document.getElementById('data_wydania').value,
+                organ_wydajacy: document.getElementById('organ_wydajacy').value,
+                plec: document.getElementById('plec').value,
+                birth_location: document.getElementById('birth_location').value,
+                dad_surname: document.getElementById('dad_surname').value,
+                mom_surname: document.getElementById('mom_surname').value,
+                dad_name: document.getElementById('dad_name').value,
+                mom_name: document.getElementById('mom_name').value,
+                photo: photoPreview.src
+            };
+
+            try {
+                localStorage.setItem('userData', JSON.stringify(data));
+                showCustomAlert('Dane zostały zapisane!', () => {
+                    window.location.href = 'id.html';
+                });
+            } catch (error) {
+                showCustomAlert('Błąd podczas zapisywania danych: ' + error.message);
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
+
